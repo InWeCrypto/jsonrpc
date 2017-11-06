@@ -134,7 +134,12 @@ func (client *RPCClient) Call(method string, params ...interface{}) (*RPCRespons
 	var p interface{}
 	if len(params) != 0 {
 		p = params
+	} else {
+		empty := make([]interface{}, 0)
+
+		p = empty
 	}
+
 	httpRequest, err := client.newRequest(false, method, p)
 	if err != nil {
 		return nil, err
